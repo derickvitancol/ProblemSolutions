@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.Arrays;
 
 public class RedundantConnection {
     public static void main(String[] args) {
@@ -46,9 +46,11 @@ public class RedundantConnection {
     }
 
     public boolean mergeByRank(int elementA, int elementB) {
+
         int parentA = find(elementA);
         int parentB = find(elementB);
-
+        // When the parents is equal, then it means that a connection to the node is
+        // alredy existing
         if (parentA == parentB) {
             return false;
         }
@@ -65,9 +67,3 @@ public class RedundantConnection {
         return true;
     }
 }
-
-/*
- * 
- * Input: edges = [[1,2],[1,3],[2,3]]
- * Output: [2,3]
- */
