@@ -65,8 +65,8 @@ public class SegmentTree {
             return tree[node];
         }
         int mid = (start + end) / 2;
-        int leftSum = queryRangeSum(2 * node + 1, start, mid, requiredStart, requiredEnd);
-        int rightSum = queryRangeSum(2 * node + 2, mid + 1, end, requiredStart, requiredEnd);
+        int leftSum = queryRangeSum(2 * node, start, mid, requiredStart, requiredEnd);
+        int rightSum = queryRangeSum(2 * node + 1, mid + 1, end, requiredStart, requiredEnd);
         return leftSum + rightSum;
     }
 }
