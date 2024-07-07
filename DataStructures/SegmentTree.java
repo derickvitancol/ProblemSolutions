@@ -6,7 +6,7 @@ public class SegmentTree {
 
     public static void main(String[] args) {
         SegmentTree segmentTree = new SegmentTree();
-        int[] sample = { 1, 3, 7, 9, 11 };
+        int[] sample = { 1, 3, 7, 9, 10, 1 };
         segmentTree.init(sample);
         segmentTree.build(0, 0, sample.length - 1);
         System.out.println(segmentTree.tree[0]);
@@ -29,11 +29,12 @@ public class SegmentTree {
             this.tree[node] = this.inputArray[start];
         } else {
             int mid = (start + end) / 2;
-            build(2 * node + 1, start, mid);
+
+            build(2 * node, start, mid);
             // Recurse on the right child
-            build(2 * node + 2, mid + 1, end);
+            build(2 * node + 1, mid + 1, end);
             // Internal node will have the sum of both of its children
-            tree[node] = tree[2 * node + 1] + tree[2 * node + 2];
+            tree[node] = tree[2 * node] + tree[2 * node + 1];
         }
     }
 
@@ -46,13 +47,13 @@ public class SegmentTree {
             int mid = (start + end) / 2;
             if (start <= idx && idx <= mid) {
                 // If idx is in the left child, recurse on the left child
-                update(2 * node + 1, start, mid, idx, val);
+                update(2 * node, start, mid, idx, val);
             } else {
                 // if idx is in the right child, recurse on the right child
-                update(2 * node + 2, mid + 1, end, idx, val);
+                update(2 * node + 1, mid + 1, end, idx, val);
             }
             // Internal node will have the sum of both of its children
-            tree[node] = tree[2 * node + 1] + tree[2 * node + 2];
+            tree[node] = tree[2 * node] + tree[2 * node + 1];
         }
     }
 
@@ -65,8 +66,8 @@ public class SegmentTree {
             return tree[node];
         }
         int mid = (start + end) / 2;
-        int leftSum = queryRangeSum(2 * node + 1, start, mid, requiredStart, requiredEnd);
-        int rightSum = queryRangeSum(2 * node + 2, mid + 1, end, requiredStart, requiredEnd);
+        int leftSum = queryRangeSum(2 * node, start, mid, requiredStart, requiredEnd);
+        int rightSum = queryRangeSum(2 * node + 1, mid + 1, end, requiredStart, requiredEnd);
         return leftSum + rightSum;
     }
 }
